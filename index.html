@@ -149,22 +149,6 @@
   .status{ margin-top:1rem; min-height:1.2em; font-size:.85rem; color:var(--muted); }
   .status.error{ color:#ffb4a4; }
 
-  /* 설정 안내 (config 미설정 시) */
-  /*
-  .setup{
-    margin-top:1.4rem; text-align:left;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,212,154,.25);
-    border-radius:14px; padding:1rem 1.15rem;
-    font-size:.84rem; color:var(--cream); line-height:1.55;
-  }
-  .setup b{ color:var(--gold); }
-  .setup code{
-    font-family:"JetBrains Mono",monospace; font-size:.8em;
-    background:rgba(0,0,0,.28); padding:.1em .4em; border-radius:5px; color:var(--apricot);
-  }
-  */
-  .hidden{ display:none !important; }
 
   @media (prefers-reduced-motion: reduce){
     .stage{ animation:none; }
@@ -209,12 +193,6 @@
     </div>
     <p class="status" id="status"></p>
 
-    <div class="setup hidden" id="setup">
-      <p><b>설정이 필요합니다.</b> GitHub 저장소 → <b>Settings → Secrets and variables → Actions</b>
-      에서 <code>SUPABASE_URL</code> 과 <code>SUPABASE_ANON_KEY</code> 를 등록하세요.</p>
-      <p style="margin-top:.6rem">등록 후 <b>Actions → Deploy to GitHub Pages → Run workflow</b>
-      를 실행하면 값이 자동으로 주입되어 배포됩니다.</p>
-    </div>
   </main>
 
 <section class="trends-section">
@@ -247,13 +225,6 @@
     }).format(date);
   }
 
-  function isConfigured(){
-    return SUPABASE_URL.startsWith("https://") &&
-           !SUPABASE_URL.includes("__") &&
-           !SUPABASE_ANON_KEY.includes("__") &&
-           SUPABASE_ANON_KEY.length > 20;
-  }
-
   function setStatus(msg, isError){
     const el = $("status");
     el.textContent = msg || "";
@@ -261,11 +232,6 @@
   }
 
   async function loadWakeup(){
-    if(!isConfigured()){
-      $("setup").classList.remove("hidden");
-      setStatus("");
-      return;
-    }
     const btn = $("refreshBtn");
     btn.disabled = true;
     setStatus("", false);
