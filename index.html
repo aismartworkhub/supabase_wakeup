@@ -150,6 +150,7 @@
   .status.error{ color:#ffb4a4; }
 
   /* 설정 안내 (config 미설정 시) */
+  /*
   .setup{
     margin-top:1.4rem; text-align:left;
     background:rgba(255,255,255,.05);
@@ -162,6 +163,7 @@
     font-family:"JetBrains Mono",monospace; font-size:.8em;
     background:rgba(0,0,0,.28); padding:.1em .4em; border-radius:5px; color:var(--apricot);
   }
+  */
   .hidden{ display:none !important; }
 
   @media (prefers-reduced-motion: reduce){
@@ -192,10 +194,9 @@
 <body>
   <main class="stage">
     <p class="eyebrow">Supabase · GitHub Actions</p>
-    <p class="subtitle">매일 아침 KST에 자동으로 깨어납니다</p>
+    <p class="subtitle">매일 오전 KST에 자동으로 깨어납니다</p>
 
     <p class="now-big" id="nowBig">--:--:--</p>
-
 
     <div class="readout">
       <p class="record-label">기록 시각</p>
@@ -207,7 +208,7 @@
       <button class="refresh" id="refreshBtn" type="button">새로고침</button>
     </div>
     <p class="status" id="status"></p>
-    
+
     <div class="setup hidden" id="setup">
       <p><b>설정이 필요합니다.</b> GitHub 저장소 → <b>Settings → Secrets and variables → Actions</b>
       에서 <code>SUPABASE_URL</code> 과 <code>SUPABASE_ANON_KEY</code> 를 등록하세요.</p>
@@ -267,7 +268,7 @@
     }
     const btn = $("refreshBtn");
     btn.disabled = true;
-    setStatus("불러오는 중…", false);
+    setStatus("", false);
     try{
       const url = `${SUPABASE_URL}/rest/v1/${TABLE}` +
         `?select=${COLUMN}&order=${COLUMN}.desc&limit=1`;
@@ -283,7 +284,7 @@
       }
       const rows = await res.json();
       if(!rows.length || !rows[0][COLUMN]){
-        setStatus("아직 기록이 없습니다. 워크플로를 한 번 실행해 보세요.", false);
+        setStatus("", false);
         return;
       }
       const ts = rows[0][COLUMN];
