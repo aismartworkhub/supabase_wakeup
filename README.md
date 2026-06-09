@@ -1,9 +1,9 @@
 # Wakeup Clock ⏰🌅
 
 매일 아침 **06:00 KST**에 GitHub Actions(cron)가 Supabase `wakeup` 테이블의
-`created_at`을 현재 시각으로 갱신하고, `index.html`이 그 기록을 **아날로그 시계**로 보여줍니다.
+`created_at`을 현재 시각으로 갱신하고, `index.html`이 그 기록을 보여줍니다.
 
-> 무료 Supabase 프로젝트가 비활성으로 일시정지되는 것을 막는 "하트비트" 용도로도 유용합니다.
+> 무료 Supabase 프로젝트가 비활성으로 일시정지되는 것을 막는 "하트비트" 용도로 사용!
 
 ## 파일 구조
 ```
